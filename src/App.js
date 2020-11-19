@@ -1,10 +1,12 @@
 import React from 'react';
-import parse from 'html-react-parser';
+
+import './style.css';
 import './App.css';
 import MerchantDetail from './MerchantDetail'
 
 class App extends React.Component {
   state = {
+    isLoading: true,
     jsonData: null,
   }
   componentDidMount = async () => {
@@ -14,24 +16,26 @@ class App extends React.Component {
         console.log(jsonData)
         // console.log(typeof jsonData)
         this.setState({
-          jsonData: jsonData
+          isLoading: false,
+          jsonData: jsonData,
+          merchantsDetail: jsonData.merchants,
         })
       })
       .catch((error) => {
         console.error(error)
       })
   }
+  
 
-  merchantDetails = () => {
-    const { jsonData } = this.state;
+  merchants = () => {
+    const { jsonData, merchantsDetail } = this.state;
     if (jsonData !== null) {
-      let merchants = jsonData.merchants.map((merchant, i) => {
-        console.log(merchant, i)
+      let merchants = merchantsDetail.map((merchant, i) => {
         return (
-          <div key={i}>
-            <h1>{merchant.shopNameTH}</h1>
-            <p>{parse(merchant.highlightText)}</p>
-          </div>
+          <MerchantDetail
+            detail={merchant}
+            key={i}
+          />
         )
       })
       return merchants
@@ -47,7 +51,19 @@ class App extends React.Component {
   render() {
     return (
       <div>
-          {this.merchantDetails()}
+        <nav class="navbar navbar-light bg-light">
+          <span class="navbar-brand mb-0 h1">Navbar</span>
+        </nav>
+        <div className="container-fluid">
+          <div className="row">
+            <div className="col-md-3">
+              <p>Filter Box</p>
+            </div>
+            <div className="col-md-9">
+              {this.merchants()}
+            </div>
+          </div>
+        </div>
       </div>
     );
   }

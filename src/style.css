@@ -1,0 +1,40 @@
+:root {
+    --blue: #1d3d81;
+    --light-blue: #bfcff3;
+}
+
+.container-fluid {
+    max-width: 1600px;
+}
+.merchant {
+    display: flex;
+    flex-direction: row;
+    background-color: #fff;
+    border: 1px solid var(--light-blue);
+    border-radius: 5px;
+    margin: 0 0 25px;
+}
+.merchant .body {
+    padding: 20px 25px;
+}
+.merchant .img {
+    padding: 5px;
+}
+.merchant .img img {
+    width: 300px;
+    object-fit:cover;
+    height: 300px;
+    border-radius: 5px;
+}
+
+@media only screen and (max-width: 1020px) {
+    .merchant {
+        flex-direction: column;
+    }
+    .merchant .img {
+        padding: 0;
+    }
+    .merchant .img img {
+        width: 100%;
+    }
+  }
