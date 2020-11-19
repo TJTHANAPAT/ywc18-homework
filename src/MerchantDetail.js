@@ -4,9 +4,9 @@ import parse from 'html-react-parser';
 class MerchantDetail extends React.Component {
     availableBadge = (isOpen) => {
         if (isOpen == 'Y') {
-            return <span class="badge badge-success">เปิดอยู่</span>
+            return <span className="badge badge-success">เปิดอยู่</span>
         } else if (isOpen == 'N') {
-            return <span class="badge badge-secondary">ปิดแล้ว</span>
+            return <span className="badge badge-secondary">ปิดแล้ว</span>
         }
     }
     priceLevelStatus = (priceLevel) => {
@@ -33,7 +33,7 @@ class MerchantDetail extends React.Component {
             }
             let icons = facilities.map((facility, i) => {
                 if (facility in materialIcons) {
-                    return <span class="facility-icon material-icons" key={i} alt={facility}>{materialIcons[facility]}</span>
+                    return <span className="facility-icon material-icons" key={i} alt={facility}>{materialIcons[facility]}</span>
                 } 
             })
             return icons

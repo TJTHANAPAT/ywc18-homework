@@ -10,13 +10,14 @@ class App extends React.Component {
     // isLoading: true,
     jsonData: null,
     filterKeyCategory: 'all',
+    filterKeyPriceRange: 'all'
   }
   componentDidMount = async () => {
     fetch('https://panjs.com/ywc18.json')
       .then(response => response.json())
       .then((jsonData) => {
         console.log(jsonData)
-        jsonData.categories.push({name: 'งานบริการอื่นๆ / เบ็ดเตล็ด', subcategories: []})
+        jsonData.categories.push({ name: 'งานบริการอื่นๆ / เบ็ดเตล็ด', subcategories: [] })
         jsonData.merchants.push({
           addressDistrictName: "เขตลาดกระบัง",
           addressProvinceName: "กรุงเทพมหานคร",
@@ -48,9 +49,9 @@ class App extends React.Component {
         let options = categories.map((category, i) => {
           return (
             <div key={i}>
-              <input 
-                type="radio" name="filterKeyCategory" 
-                id={category.name} value={category.name} 
+              <input
+                type="radio" name="filterKeyCategory"
+                id={category.name} value={category.name}
                 onChange={this.handleFilterCategory}
               />
               <label htmlFor={category.name} className="ml-1">{category.name}</label>
@@ -59,13 +60,13 @@ class App extends React.Component {
         })
         return options
       }
-    }    
+    }
     return (
-      <div className="filter" style={{marginBottom: '17px'}}>
+      <div className="filter" style={{ marginBottom: '17px' }}>
         <label className="filter-name">ประเภทร้านค้า</label>
         <div>
-          <input 
-            type="radio" name="filterKeyCategory" id="allcategories" 
+          <input
+            type="radio" name="filterKeyCategory" id="allcategories"
             value="all" onChange={this.handleFilterCategory} defaultChecked
           />
           <label htmlFor="allcategories" className="ml-1">ทั้งหมด</label>
@@ -76,41 +77,52 @@ class App extends React.Component {
   }
 
   handleFilterChange = () => {
-    const { jsonData, filterKeyCategory, filterKeySubcatagory } = this.state
+    const {
+      jsonData,
+      filterKeyCategory,
+      filterKeySubcatagory,
+      filterKeyPriceRange
+    } = this.state
     const { merchants } = jsonData
-    let merchantsFiltered = []
-    if (filterKeyCategory === 'all') {
-      merchantsFiltered = merchants
-    } else if (filterKeyCategory === 'ร้านอาหารและเครื่องดื่ม') {
+    console.log(filterKeyPriceRange)
+    let merchantsFiltered = merchants
+    if (filterKeyPriceRange !== 'all') {
       merchantsFiltered = merchants.filter((item) => {
-        return (item.categoryName===filterKeyCategory || item.categoryName==='ร้านอาหาร' || item.categoryName==='ร้านเครื่องดื่ม')
+        return (item.priceLevel === parseInt(filterKeyPriceRange))
+      })
+    }
+    if (filterKeyCategory === 'all') {
+      merchantsFiltered = merchantsFiltered
+    } else if (filterKeyCategory === 'ร้านอาหารและเครื่องดื่ม') {
+      merchantsFiltered = merchantsFiltered.filter((item) => {
+        return (item.categoryName === filterKeyCategory || item.categoryName === 'ร้านอาหาร' || item.categoryName === 'ร้านเครื่องดื่ม')
       })
       if (filterKeySubcatagory !== 'all') {
         merchantsFiltered = merchantsFiltered.filter((item) => {
-          return (item.subcategoryName===filterKeySubcatagory)
+          return (item.subcategoryName === filterKeySubcatagory)
         })
       }
     } else if (filterKeyCategory === 'สินค้าทั่วไป') {
-      merchantsFiltered = merchants.filter((item) => {
-        return (item.categoryName===filterKeyCategory || item.categoryName==='แฟชั่น')
+      merchantsFiltered = merchantsFiltered.filter((item) => {
+        return (item.categoryName === filterKeyCategory || item.categoryName === 'แฟชั่น')
       })
       if (filterKeySubcatagory !== 'all') {
         merchantsFiltered = merchantsFiltered.filter((item) => {
-          return (item.subcategoryName===filterKeySubcatagory)
+          return (item.subcategoryName === filterKeySubcatagory)
         })
       }
     } else {
-      merchantsFiltered = merchants.filter((item) => {
-        return (item.categoryName===filterKeyCategory)
+      merchantsFiltered = merchantsFiltered.filter((item) => {
+        return (item.categoryName === filterKeyCategory)
       })
       if (filterKeySubcatagory !== 'all') {
         merchantsFiltered = merchantsFiltered.filter((item) => {
-          return (item.subcategoryName===filterKeySubcatagory)
+          return (item.subcategoryName === filterKeySubcatagory)
         })
       }
     }
     console.log('filtered merchants: ', merchantsFiltered)
-    this.setState({merchantsFiltered: merchantsFiltered})
+    this.setState({ merchantsFiltered: merchantsFiltered })
   }
 
   handleFilterCategory = (event) => {
@@ -118,7 +130,7 @@ class App extends React.Component {
     this.setState({
       filterKeyCategory: event.target.value,
       filterKeySubcatagory: 'all'
-    }, ()=>{
+    }, () => {
       console.log(this.state.filterKeyCategory)
       this.handleFilterChange()
     });
@@ -128,8 +140,7 @@ class App extends React.Component {
     console.log(event.target.value)
     this.setState({
       filterKeySubcatagory: event.target.value
-    }, ()=>{
-      console.log(this.state.filterKeySubcatagory)
+    }, () => {
       this.handleFilterChange()
     });
   }
@@ -137,7 +148,7 @@ class App extends React.Component {
   filterSubcategory = () => {
     const { filterKeyCategory } = this.state;
     if (filterKeyCategory === 'all') {
-      return 
+      return
     } else {
       const { jsonData } = this.state;
       const { categories } = jsonData;
@@ -153,8 +164,8 @@ class App extends React.Component {
             // console.log(subcategory, i)
             return (
               <div key={i}>
-                <input 
-                  type="radio" name="filterKeySubcategory" id={subcategory} 
+                <input
+                  type="radio" name="filterKeySubcategory" id={subcategory}
                   value={subcategory} onChange={this.handleFilterSubcategory}
                 />
                 <label htmlFor={subcategory} className="ml-1">{subcategory}</label>
@@ -167,8 +178,8 @@ class App extends React.Component {
           <div className="filter">
             <label className="filter-name">ประเภท{filterKeyCategory}</label>
             <div>
-              <input 
-                type="radio" name="filterKeySubcategory" id="allsubcategories" 
+              <input
+                type="radio" name="filterKeySubcategory" id="allsubcategories"
                 value="all" onChange={this.handleFilterSubcategory} defaultChecked
               />
               <label htmlFor="allsubcategories" className="ml-1">ทั้งหมด</label>
@@ -180,21 +191,30 @@ class App extends React.Component {
     }
   }
 
+  handleFilterKey = (event) => {
+    console.log(event.target.id, ':', event.target.value)
+    this.setState({
+      [event.target.id]: event.target.value
+    }, () => {
+      this.handleFilterChange()
+    })
+  }
+
   filterPriceRange = () => {
     const { jsonData } = this.state;
     let priceRangeOptions = () => {
       if (!!jsonData) {
         const { priceRange } = jsonData;
         let options = priceRange.map((range, i) => {
-          return <option value={i} key={i}>{range}</option>
+          return <option value={i + 1} key={i}>{range}</option>
         })
         return options
       }
-    }    
+    }
     return (
       <div className="filter">
-        <label className="filter-name" htmlFor="filterPriceRange">ราคา</label>
-        <select className="form-control" id="filterPriceRange" defaultValue="">
+        <label className="filter-name" htmlFor="filterKeyPriceRange">ราคา</label>
+        <select className="form-control" id="filterKeyPriceRange" defaultValue="" onChange={this.handleFilterKey}>
           <option value="" disabled>กรุณาเลือก</option>
           <option value="all">ทั้งหมด</option>
           {priceRangeOptions()}
@@ -213,7 +233,7 @@ class App extends React.Component {
         })
         return options
       }
-    }    
+    }
     return (
       <div className="filter">
         <label className="filter-name" htmlFor="filterArea">จังหวัด/ใกล้ฉัน</label>
