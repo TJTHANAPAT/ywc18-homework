@@ -10,7 +10,8 @@ class App extends React.Component {
     // isLoading: true,
     jsonData: null,
     filterKeyCategory: 'all',
-    filterKeyPriceRange: 'all'
+    filterKeyPriceRange: 'all',
+    filterKeyArea: 'nearme',
   }
   componentDidMount = async () => {
     fetch('https://panjs.com/ywc18.json')
@@ -77,7 +78,7 @@ class App extends React.Component {
   }
 
   handleFilterChange = () => {
-    const {
+    let {
       jsonData,
       filterKeyCategory,
       filterKeySubcatagory,
@@ -87,6 +88,7 @@ class App extends React.Component {
     const { merchants } = jsonData
     console.log(filterKeyPriceRange)
     let merchantsFiltered = merchants
+    filterKeyArea = filterKeyArea == 'nearme' ? 'กรุงเทพมหานคร': filterKeyArea
     if (filterKeyArea !== 'all') {
       merchantsFiltered = merchantsFiltered.filter((item) => {
         return (item.addressProvinceName === filterKeyArea)
@@ -274,7 +276,9 @@ class App extends React.Component {
     } else {
       console.log('Loading Data...')
       return (
-        <p>Loading...</p>
+        <div className="text-center mt-4">
+            <span>กำลังโหลด...</span>
+          </div>
       )
     }
 
