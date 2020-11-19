@@ -24,16 +24,20 @@ class MerchantDetail extends React.Component {
         }
     }
     facilitiesIcon = (facilities) => {
-        const materialIcons = {
-            'ที่จอดรถ': 'directions_car',
-            'รับจองล่วงหน้า': 'assignment',
-            'สามารถนำสัตว์เลี้ยงเข้าได้': 'pets',
-
+        if (!!facilities) {
+            const materialIcons = {
+                'ที่จอดรถ': 'directions_car',
+                'รับจองล่วงหน้า': 'assignment',
+                'สามารถนำสัตว์เลี้ยงเข้าได้': 'pets',
+    
+            }
+            let icons = facilities.map((facility, i) => {
+                if (facility in materialIcons) {
+                    return <span class="facility-icon material-icons" key={i} alt={facility}>{materialIcons[facility]}</span>
+                } 
+            })
+            return icons
         }
-        let icons = facilities.map((facility, i) => {
-            return <span class="facility-icon material-icons" key={i}>{materialIcons[facility]}</span>
-        })
-        return icons
     }
     render() {
         let {

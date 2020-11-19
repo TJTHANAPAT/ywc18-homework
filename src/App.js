@@ -17,6 +17,18 @@ class App extends React.Component {
       .then((jsonData) => {
         console.log(jsonData)
         jsonData.categories.push({name: 'งานบริการอื่นๆ / เบ็ดเตล็ด', subcategories: []})
+        jsonData.merchants.push({
+          addressDistrictName: "เขตลาดกระบัง",
+          addressProvinceName: "กรุงเทพมหานคร",
+          categoryName: "ร้านอาหาร",
+          coverImageId: "https://www.saphanmai.com/wp-content/uploads/2019/03/49895510_2247234235565577_2936877454226096128_o.jpg",
+          highlightText: "บุฟเฟ่ต์สุกี้<strong>แบบไม่อั้น</strong>ในราคา 199 บาท",
+          isOpen: "Y",
+          priceLevel: 1,
+          recommendedItems: ["หมูกระทะ", "สุกี้"],
+          shopNameTH: "สุกกี้ตี๋น้อย",
+          subcategoryName: "ชาบู สุกี้ยากี้ หม้อไฟ",
+        })
         this.setState({
           isLoading: false,
           jsonData: jsonData,
@@ -39,7 +51,7 @@ class App extends React.Component {
               <input 
                 type="radio" name="filterKeyCategory" 
                 id={category.name} value={category.name} 
-                onClick={this.handleFilterCategory}
+                onChange={this.handleFilterCategory}
               />
               <label htmlFor={category.name} className="ml-1">{category.name}</label>
             </div>
@@ -54,7 +66,7 @@ class App extends React.Component {
         <div>
           <input 
             type="radio" name="filterKeyCategory" id="allcategories" 
-            value="all" onClick={this.handleFilterCategory} defaultChecked
+            value="all" onChange={this.handleFilterCategory} defaultChecked
           />
           <label htmlFor="allcategories" className="ml-1">ทั้งหมด</label>
         </div>
@@ -67,21 +79,35 @@ class App extends React.Component {
     const { jsonData, filterKeyCategory, filterKeySubcatagory } = this.state
     const { merchants } = jsonData
     let merchantsFiltered = []
-    console.log(filterKeyCategory)
     if (filterKeyCategory === 'all') {
       merchantsFiltered = merchants
     } else if (filterKeyCategory === 'ร้านอาหารและเครื่องดื่ม') {
       merchantsFiltered = merchants.filter((item) => {
-        return (item.categoryName==='ร้านอาหารและเครื่องดื่ม' || item.categoryName==='ร้านอาหาร' || item.categoryName==='ร้านเครื่องดื่ม')
+        return (item.categoryName===filterKeyCategory || item.categoryName==='ร้านอาหาร' || item.categoryName==='ร้านเครื่องดื่ม')
       })
+      if (filterKeySubcatagory !== 'all') {
+        merchantsFiltered = merchantsFiltered.filter((item) => {
+          return (item.subcategoryName===filterKeySubcatagory)
+        })
+      }
     } else if (filterKeyCategory === 'สินค้าทั่วไป') {
       merchantsFiltered = merchants.filter((item) => {
-        return (item.categoryName==='สินค้าทั่วไป' || item.categoryName==='แฟชั่น')
+        return (item.categoryName===filterKeyCategory || item.categoryName==='แฟชั่น')
       })
+      if (filterKeySubcatagory !== 'all') {
+        merchantsFiltered = merchantsFiltered.filter((item) => {
+          return (item.subcategoryName===filterKeySubcatagory)
+        })
+      }
     } else {
       merchantsFiltered = merchants.filter((item) => {
         return (item.categoryName===filterKeyCategory)
       })
+      if (filterKeySubcatagory !== 'all') {
+        merchantsFiltered = merchantsFiltered.filter((item) => {
+          return (item.subcategoryName===filterKeySubcatagory)
+        })
+      }
     }
     console.log('filtered merchants: ', merchantsFiltered)
     this.setState({merchantsFiltered: merchantsFiltered})
@@ -94,6 +120,16 @@ class App extends React.Component {
       filterKeySubcatagory: 'all'
     }, ()=>{
       console.log(this.state.filterKeyCategory)
+      this.handleFilterChange()
+    });
+  }
+
+  handleFilterSubcategory = (event) => {
+    console.log(event.target.value)
+    this.setState({
+      filterKeySubcatagory: event.target.value
+    }, ()=>{
+      console.log(this.state.filterKeySubcatagory)
       this.handleFilterChange()
     });
   }
@@ -118,8 +154,8 @@ class App extends React.Component {
             return (
               <div key={i}>
                 <input 
-                  type="radio" name="filterKeySubcategory" 
-                  id={subcategory} value={subcategory}
+                  type="radio" name="filterKeySubcategory" id={subcategory} 
+                  value={subcategory} onChange={this.handleFilterSubcategory}
                 />
                 <label htmlFor={subcategory} className="ml-1">{subcategory}</label>
               </div>
@@ -133,7 +169,7 @@ class App extends React.Component {
             <div>
               <input 
                 type="radio" name="filterKeySubcategory" id="allsubcategories" 
-                value="all" defaultChecked
+                value="all" onChange={this.handleFilterSubcategory} defaultChecked
               />
               <label htmlFor="allsubcategories" className="ml-1">ทั้งหมด</label>
             </div>
@@ -205,7 +241,7 @@ class App extends React.Component {
         return merchants
       } else {
         return (
-          <div className="text-center">
+          <div className="text-center mt-4">
             <span>ขออภัย ไม่พบร้านค้าที่คุณต้องการ</span>
           </div>
         )
