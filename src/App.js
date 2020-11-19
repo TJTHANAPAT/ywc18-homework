@@ -19,8 +19,8 @@ class App extends React.Component {
         console.log(jsonData)
         jsonData.categories.push({ name: 'งานบริการอื่นๆ / เบ็ดเตล็ด', subcategories: [] })
         jsonData.merchants.push({
-          addressDistrictName: "เขตลาดกระบัง",
-          addressProvinceName: "กรุงเทพมหานคร",
+          addressDistrictName: "เมืองสมุทรปราการ",
+          addressProvinceName: "สมุทรปราการ",
           categoryName: "ร้านอาหาร",
           coverImageId: "https://www.saphanmai.com/wp-content/uploads/2019/03/49895510_2247234235565577_2936877454226096128_o.jpg",
           highlightText: "บุฟเฟ่ต์สุกี้<strong>แบบไม่อั้น</strong>ในราคา 199 บาท",
@@ -81,13 +81,19 @@ class App extends React.Component {
       jsonData,
       filterKeyCategory,
       filterKeySubcatagory,
-      filterKeyPriceRange
+      filterKeyPriceRange,
+      filterKeyArea
     } = this.state
     const { merchants } = jsonData
     console.log(filterKeyPriceRange)
     let merchantsFiltered = merchants
+    if (filterKeyArea !== 'all') {
+      merchantsFiltered = merchantsFiltered.filter((item) => {
+        return (item.addressProvinceName === filterKeyArea)
+      })
+    }
     if (filterKeyPriceRange !== 'all') {
-      merchantsFiltered = merchants.filter((item) => {
+      merchantsFiltered = merchantsFiltered.filter((item) => {
         return (item.priceLevel === parseInt(filterKeyPriceRange))
       })
     }
@@ -148,7 +154,7 @@ class App extends React.Component {
   filterSubcategory = () => {
     const { filterKeyCategory } = this.state;
     if (filterKeyCategory === 'all') {
-      return
+      //pass
     } else {
       const { jsonData } = this.state;
       const { categories } = jsonData;
@@ -161,7 +167,6 @@ class App extends React.Component {
       if (subcategories.length > 0) {
         let subcategoryOptions = () => {
           let options = subcategories.map((subcategory, i) => {
-            // console.log(subcategory, i)
             return (
               <div key={i}>
                 <input
@@ -236,8 +241,8 @@ class App extends React.Component {
     }
     return (
       <div className="filter">
-        <label className="filter-name" htmlFor="filterArea">จังหวัด/ใกล้ฉัน</label>
-        <select className="form-control" id="filterArea">
+        <label className="filter-name" htmlFor="filterKeyArea">จังหวัด/ใกล้ฉัน</label>
+        <select className="form-control" id="filterKeyArea" onChange={this.handleFilterKey}>
           <option value="nearme" defaultValue>พื้นที่ใกล้ฉัน</option>
           <option value="all">พื้นที่ทั้งหมด</option>
           {provinceOptions()}
