@@ -25,22 +25,45 @@ class App extends React.Component {
       })
   }
 
-  filterArea = () => {
+  filterPriceRange = () => {
     const { jsonData } = this.state;
-    let provinceOptions = () => {
+    let priceRangeOptions = () => {
       if (jsonData !== null) {
-        const { provinces } = jsonData;
-        let options = provinces.map((province, i) => {
-          return <option value={{province}} key={i}>{province}</option>
+        const { priceRange } = jsonData;
+        let options = priceRange.map((range, i) => {
+          return <option value={i} key={i}>{range}</option>
         })
         return options
       }
     }    
     return (
       <div>
-        <label for="filterArea">จังหวัด/ใกล้ฉัน</label>
-        <select class="form-control" id="filterArea">
-          <option value="nearme" selected>พื้นที่ใกล้ฉัน</option>
+        <label htmlFor="filterPriceRange">ราคา</label>
+        <select className="form-control" id="filterPriceRange" defaultValue="">
+          <option value="" disabled>กรุณาเลือก</option>
+          <option value="all">ทั้งหมด</option>
+          {priceRangeOptions()}
+        </select>
+      </div>
+    )
+  }
+
+  filterArea = () => {
+    const { jsonData } = this.state;
+    let provinceOptions = () => {
+      if (jsonData !== null) {
+        const { provinces } = jsonData;
+        let options = provinces.map((province, i) => {
+          return <option value={province} key={i}>{province}</option>
+        })
+        return options
+      }
+    }    
+    return (
+      <div>
+        <label htmlFor="filterArea">จังหวัด/ใกล้ฉัน</label>
+        <select className="form-control" id="filterArea">
+          <option value="nearme" defaultValue>พื้นที่ใกล้ฉัน</option>
           <option value="all">พื้นที่ทั้งหมด</option>
           {provinceOptions()}
         </select>
@@ -72,13 +95,14 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <nav class="navbar navbar-light bg-light">
-          <span class="navbar-brand mb-0 h1">Navbar</span>
+        <nav className="navbar navbar-light bg-light">
+          <span className="navbar-brand mb-0 h1">Navbar</span>
         </nav>
         <div className="container-fluid">
           <div className="row">
             <div className="col-md-3">
-              <p>Filter Box</p>
+              <h2>Filter</h2>
+              {this.filterPriceRange()}
               {this.filterArea()}
             </div>
             <div className="col-md-9">
