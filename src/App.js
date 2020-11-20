@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux'
 
+import './style.css';
 import Header from './header/Header';
 import FilterPanel from './filters/FilterPanel';
 import MerchantList from './merchants/MerchantList';
