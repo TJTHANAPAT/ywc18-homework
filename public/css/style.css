@@ -212,3 +212,16 @@ button.btn-toggle-close:hover{
 select {
   font-family: 'FontAwesome', 'Athiti', 'san-serif' !important;
 }
+.footer-bar {
+  background-color: var(--custom-blue);
+  margin-top: 25px;
+}
+.footer-bar-body {
+  padding: 25px 20px;
+  margin: 0 auto;
+  color: white;
+  max-width: 1200px;
+}
+.footer-bar p {
+  margin: 0;
+}

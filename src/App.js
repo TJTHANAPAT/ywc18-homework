@@ -6,6 +6,7 @@ import FilterPanel from './filters/FilterPanel';
 import MerchantList from './merchants/MerchantList';
 import TitleBar from './header/TitleBar';
 import FilterPanelForMobile from './filters/FilterPanelForMobile';
+import Footer from './footer/Footer';
 
 class App extends React.Component {
   componentDidMount = async () => {
@@ -48,6 +49,7 @@ class App extends React.Component {
             <MerchantList/>
           </div>
         </div>
+        <Footer/>
       </div>
     );
   }
