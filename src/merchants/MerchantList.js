@@ -13,11 +13,13 @@ class MerchantList extends React.Component {
       filterKeyCategory,
       filterKeySubcatagory,
       filterKeyPriceRange,
-      filterKeyArea
+      filterKeyArea,
+      isSearch,
     } = this.props
     const { merchants } = jsonData
     let merchantsFiltered = merchants
-    filterKeyArea = filterKeyArea == 'nearme' ? 'กรุงเทพมหานคร': filterKeyArea
+    filterKeyArea = filterKeyArea === 'nearme' ? 'กรุงเทพมหานคร': filterKeyArea
+    // assume that user is in Bangkok
     if (filterKeyArea !== 'all') {
       merchantsFiltered = merchantsFiltered.filter((item) => {
         return (item.addressProvinceName === filterKeyArea)
@@ -29,7 +31,7 @@ class MerchantList extends React.Component {
       })
     }
     if (filterKeyCategory === 'all') {
-      merchantsFiltered = merchantsFiltered
+      //pass
     } else if (filterKeyCategory === 'ร้านอาหารและเครื่องดื่ม') {
       merchantsFiltered = merchantsFiltered.filter((item) => {
         return (item.categoryName === filterKeyCategory || item.categoryName === 'ร้านอาหาร' || item.categoryName === 'ร้านเครื่องดื่ม')
@@ -57,6 +59,20 @@ class MerchantList extends React.Component {
           return (item.subcategoryName === filterKeySubcatagory)
         })
       }
+    }
+    // facilities shopNameTH, highlightText, recommendedItems.join(', ')
+    if (isSearch) {
+      const { searchWordSearched } = this.props
+      const searchWord = searchWordSearched.toLowerCase()
+      merchantsFiltered = merchantsFiltered.filter((item) => {
+        const merchantShopName = item.shopNameTH.toLowerCase()
+        const merchantHighlightText = item.highlightText.toLowerCase()
+        const merchantRecommendedItems = item.recommendedItems.join(' ').toLowerCase()
+        return (
+          merchantShopName.includes(searchWord) || merchantHighlightText.includes(searchWord) ||
+          merchantRecommendedItems.includes(searchWord)
+        )
+      })
     }
     // console.log('filtered merchants: ', merchantsFiltered)
     return merchantsFiltered

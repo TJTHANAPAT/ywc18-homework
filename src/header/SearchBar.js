@@ -3,16 +3,52 @@ import { connect } from 'react-redux';
 import FilterArea from '../filters/FilterArea';
 
 const mapStateToProps = (state) => {
-  return state
+  const { searchWord } = state;
+  return { searchWord }
 }
 
 class SearchBar extends React.Component {
+  handleChangeInputSearch = (event) => {
+    const searchWord = event.target.value
+    console.log(`searchWord: ${searchWord}`)
+    if (searchWord !== '') {
+      this.props.dispatch({
+        type: "SET_STATE",
+        data: {searchWord}
+      })
+    } else {
+      console.log('Not search')
+      this.props.dispatch({
+        type: "SET_STATE",
+        data: {isSearch: false}
+      })
+    }
+  }
+  handleSearch = (event) => {
+    event.preventDefault();
+    if (!!this.props.searchWord) {
+      console.log('Search')
+      this.props.dispatch({
+        type: "SET_STATE",
+        data: {isSearch: true, searchWordSearched: this.props.searchWord}
+      })
+    }
+    console.log('Click Search Btn.')
+  }
   render() {
     return (
       <div className="search-bar">
         <FilterArea isOnlySelectBox={true} />
-        <input type="text" id="searchKeyword" className="form-control" placeholder="ค้นหา ชื่อ ร้านอาหาร และเครื่องดื่ม ร้านธงฟ้า ร้าน OTOP และสินค้าทั่วไป" />
-        <button className="btn btn-light"><span className="fa fa-search"></span></button>
+        <form className="search-bar" onSubmit={this.handleSearch}>
+          <input 
+            type="text" id="searchWord" className="form-control" 
+            placeholder="ค้นหา ชื่อ ร้านอาหาร และเครื่องดื่ม ร้านธงฟ้า ร้าน OTOP และสินค้าทั่วไป"
+            onChange={this.handleChangeInputSearch}
+          />
+          <button className="btn btn-light" type="submit">
+            <span className="fa fa-search"></span>
+          </button>
+        </form>
       </div>
     )
   }

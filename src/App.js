@@ -1,9 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux'
 
-import './css/style.css';
-import './css/bootstrap.min.css'
-import './App.css';
 import Header from './header/Header';
 import FilterPanel from './filters/FilterPanel';
 import MerchantList from './merchants/MerchantList';

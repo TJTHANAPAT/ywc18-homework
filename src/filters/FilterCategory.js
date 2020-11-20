@@ -2,7 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 const mapStateToProps = (state) => {
-  return { jsonData: state.jsonData }
+  const {jsonData, filterKeyCategory} = state;
+  return { jsonData, filterKeyCategory }
 }
 
 class FilterCategory extends React.Component {
@@ -28,6 +29,7 @@ class FilterCategory extends React.Component {
               className="form-check-input"
               id={category.name} value={category.name}
               onChange={this.handleFilterCategory}
+              checked={this.props.filterKeyCategory === category.name}
             />
             <label htmlFor={category.name} className="form-check-label">{category.name}</label>
           </div>
@@ -45,7 +47,8 @@ class FilterCategory extends React.Component {
               type="radio" name="filterKeyCategory" 
               className="form-check-input"
               id="allcategories" value="all"
-              onChange={this.handleFilterCategory} defaultChecked
+              onChange={this.handleFilterCategory}
+              checked={this.props.filterKeyCategory === 'all'}
             />
             <label htmlFor="allcategories" className="form-check-label">ทั้งหมด</label>
           </div>
