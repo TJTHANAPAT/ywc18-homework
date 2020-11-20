@@ -289,6 +289,24 @@ class App extends React.Component {
       <div>
         <nav className="navbar navbar-light bg-light">
           <span className="navbar-brand mb-0 h1">คนละครึ่ง by YWC</span>
+
+          <form class="form-inline">
+            <label class="sr-only" for="inlineFormInputGroupUsername2">Username</label>
+            <div class="input-group mb-2 mr-sm-2">
+              <div class="input-group-prepend">
+                {/* <div class="input-group-text">@</div> */}
+                <select style={{fontFamily:"'FontAwesome', 'Athiti', 'san-serif'"}} className="form-control input-group-text" id="filterKey" defaultValue="" onChange={this.handleFilterKey}>
+                  <option value="" disabled>กรุณาเลือก</option>
+                  <option value="all">ทั้งหมด &#xf036;</option>
+                </select>
+              </div>
+              <input type="text" class="form-control" id="inlineFormInputGroupUsername2" placeholder="ค้นหา ชื่อ ร้านอาหาร และเครื่องดื่ม ร้านธงฟ้า ร้าน OTOP และสินค้าทั่วไป" />
+              <div class="input-group-append">
+                <button type="submit" class="btn btn-primary mb-2">ค้นหา</button>
+              </div>
+            </div>
+          </form>
+
         </nav>
         <div className="container-fluid">
           <div className="row">
