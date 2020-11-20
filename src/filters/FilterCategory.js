@@ -25,7 +25,7 @@ class FilterCategory extends React.Component {
           <div className="form-group form-check filter-radio" key={i}>
             <input
               type="radio" name="filterKeyCategory" 
-              class="form-check-input"
+              className="form-check-input"
               id={category.name} value={category.name}
               onChange={this.handleFilterCategory}
             />
@@ -43,7 +43,7 @@ class FilterCategory extends React.Component {
           <div className="form-group form-check filter-radio">
             <input
               type="radio" name="filterKeyCategory" 
-              class="form-check-input"
+              className="form-check-input"
               id="allcategories" value="all"
               onChange={this.handleFilterCategory} defaultChecked
             />

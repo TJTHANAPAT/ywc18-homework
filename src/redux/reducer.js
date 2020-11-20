@@ -1,8 +1,10 @@
 const initialState = {
   jsonData: null,
   filterKeyCategory: 'all',
-  filterKeyPriceRange: 'all',
+  filterKeyPriceRange: '',
   filterKeyArea: 'nearme',
+  isShowFilterOnMobile: false,
+  isShowFilterNormal: true,
 }
 
 const reducer = (state=initialState, action) => {

@@ -1,17 +1,30 @@
+import React from 'react';
+import { connect } from 'react-redux';
 import FilterArea from './FilterArea';
 import FilterPriceRange from './FilterPriceRange';
 import FilterCategory from './FilterCategory';
 import FilterSubcategory from './FilterSubcategory';
 
-const FilterPanel = () => {
-  return (
-    <div className="filter-panel col-md-3">
-      <h1>FilterPanel</h1>
-      <FilterCategory/>
-      <FilterArea/>
-      <FilterPriceRange/>
-      <FilterSubcategory/>
-    </div>
-  )
+const mapStateToProps = (state) => {
+  return {
+    isShowFilterNormal: state.isShowFilterNormal,
+  }
 }
-export default FilterPanel;
+
+class FilterPanel extends React.Component {
+  render() {
+    if (this.props.isShowFilterNormal) {
+      return (
+        <div className="filter-panel col-md-3">
+          <FilterCategory />
+          <FilterPriceRange />
+          <FilterArea />
+          <FilterSubcategory />
+        </div>
+      )
+    } else {
+      return null
+    }
+  }
+}
+export default connect(mapStateToProps)(FilterPanel);
