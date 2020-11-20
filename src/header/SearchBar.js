@@ -10,14 +10,12 @@ const mapStateToProps = (state) => {
 class SearchBar extends React.Component {
   handleChangeInputSearch = (event) => {
     const searchWord = event.target.value
-    console.log(`searchWord: ${searchWord}`)
     if (searchWord !== '') {
       this.props.dispatch({
         type: "SET_STATE",
         data: {searchWord}
       })
     } else {
-      console.log('Not search')
       this.props.dispatch({
         type: "SET_STATE",
         data: {isSearch: false}
@@ -27,13 +25,11 @@ class SearchBar extends React.Component {
   handleSearch = (event) => {
     event.preventDefault();
     if (!!this.props.searchWord) {
-      console.log('Search')
       this.props.dispatch({
         type: "SET_STATE",
         data: {isSearch: true, searchWordSearched: this.props.searchWord}
       })
     }
-    console.log('Click Search Btn.')
   }
   render() {
     return (
@@ -42,7 +38,7 @@ class SearchBar extends React.Component {
         <form className="search-bar" onSubmit={this.handleSearch}>
           <input 
             type="text" id="searchWord" className="form-control" 
-            placeholder="ค้นหา ชื่อ ร้านอาหาร และเครื่องดื่ม ร้านธงฟ้า ร้าน OTOP และสินค้าทั่วไป"
+            placeholder="ค้นหา ชื่อ ร้านอาหารและเครื่องดื่ม ร้านธงฟ้า ร้าน OTOP และสินค้าทั่วไป"
             onChange={this.handleChangeInputSearch}
           />
           <button className="btn btn-light" type="submit">

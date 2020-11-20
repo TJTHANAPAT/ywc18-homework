@@ -15,7 +15,6 @@ const mapStateToProps = (state) => {
 class FilterPanelForMobile extends React.Component {
   componentDidMount() {
     window.addEventListener('resize', () => {
-      console.log('width', window.innerWidth, 'height', window.innerHeight)
       if (window.innerWidth > 768) {
         this.props.dispatch({
           type: 'SET_STATE',

@@ -13,7 +13,7 @@ const mapStateToProps = (state) => {
 
 class FilterPanel extends React.Component {
   render() {
-    if (this.props.isShowFilterNormal) {
+    if (this.props.isShowFilterNormal && window.innerWidth > 768) {
       return (
         <div className="filter-panel col-md-3">
           <FilterCategory />
