@@ -1,5 +1,5 @@
 import React from 'react';
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 
 import Header from './header/Header';
 import FilterPanel from './filters/FilterPanel';
@@ -30,7 +30,7 @@ class App extends React.Component {
         })
         this.props.dispatch({
           type: 'SET_STATE',
-          data: {jsonData: jsonData},
+          data: { jsonData: jsonData },
         })
       })
       .catch((error) => {
@@ -40,16 +40,16 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <Header/>
+        <Header />
         <div className="container-fluid container-body">
           <div className="row">
-            <FilterPanelForMobile/>
-            <TitleBar/>
-            <FilterPanel/>
-            <MerchantList/>
+            <FilterPanelForMobile />
+            <TitleBar />
+            <FilterPanel />
+            <MerchantList />
           </div>
         </div>
-        <Footer/>
+        <Footer />
       </div>
     );
   }
