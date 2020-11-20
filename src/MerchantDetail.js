@@ -3,9 +3,9 @@ import parse from 'html-react-parser';
 
 class MerchantDetail extends React.Component {
     availableBadge = (isOpen) => {
-        if (isOpen == 'Y') {
+        if (isOpen === 'Y') {
             return <span className="badge badge-success">เปิดอยู่</span>
-        } else if (isOpen == 'N') {
+        } else if (isOpen === 'N') {
             return <span className="badge badge-secondary">ปิดแล้ว</span>
         }
     }
@@ -16,7 +16,7 @@ class MerchantDetail extends React.Component {
     }
     recommendedItemsBar = (categoryName, recommendedItems) => {
         let recommendedWord = 'สินค้าแนะนำ'
-        if (categoryName == 'ร้านอาหาร') {
+        if (categoryName === 'ร้านอาหาร') {
             recommendedWord = 'เมนูแนะนำ'
         }
         if (!!recommendedItems && recommendedItems !== []) {
@@ -24,17 +24,26 @@ class MerchantDetail extends React.Component {
         }
     }
     facilitiesIcon = (facilities) => {
-        if (!!facilities) {
-            const materialIcons = {
-                'ที่จอดรถ': 'directions_car',
-                'รับจองล่วงหน้า': 'assignment',
-                'สามารถนำสัตว์เลี้ยงเข้าได้': 'pets',
-    
+        if (!!facilities && facilities !== []) {
+            const fontAmesomeIcons = {
+                'ที่จอดรถ': 'fa-car',
+                'รับจองล่วงหน้า': 'fa-file-text',
+                'สามารถนำสัตว์เลี้ยงเข้าได้': 'fa-paw',
             }
             let icons = facilities.map((facility, i) => {
-                if (facility in materialIcons) {
-                    return <span className="facility-icon material-icons" key={i} alt={facility}>{materialIcons[facility]}</span>
-                } 
+                if (facility in fontAmesomeIcons) {
+                    // return <span className="facility-icon" key={i} alt={facility}><i className={"fa fa-fw fa-2x " + fontAmesomeIcons[facility]} aria-hidden="true"></i></span>
+                    return (
+                        <span 
+                            className={"facility-icon"}
+                            key={i} alt={facility}
+                        >
+                            <i className={"fa fa-fw fa-lg " + fontAmesomeIcons[facility]}></i>
+                        </span>
+                    )
+                } else {
+                    return console.log(`There is no icon assigned for "${facility}" facility.`)
+                }
             })
             return icons
         }
@@ -57,7 +66,7 @@ class MerchantDetail extends React.Component {
         return (
             <div className="merchant">
                 <div className="img">
-                    <img src={coverImageId}/>
+                    <img src={coverImageId} alt={shopNameTH}/>
                 </div>
                 <div className="body">
                     <h2>{shopNameTH} {this.availableBadge(isOpen)}</h2>

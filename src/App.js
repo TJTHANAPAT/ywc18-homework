@@ -30,11 +30,14 @@ class App extends React.Component {
           recommendedItems: ["หมูกระทะ", "สุกี้"],
           shopNameTH: "สุกกี้ตี๋น้อย",
           subcategoryName: "ชาบู สุกี้ยากี้ หม้อไฟ",
+          facilities: ['ไม่มี']
         })
         this.setState({
           isLoading: false,
           jsonData: jsonData,
           merchantsFiltered: jsonData.merchants,
+        }, ()=> {
+          this.handleFilterChange()
         })
       })
       .catch((error) => {
