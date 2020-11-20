@@ -10,17 +10,10 @@ const mapStateToProps = (state) => {
 class SearchBar extends React.Component {
   handleChangeInputSearch = (event) => {
     const searchWord = event.target.value
-    if (searchWord !== '') {
-      this.props.dispatch({
-        type: "SET_STATE",
-        data: {searchWord}
-      })
-    } else {
-      this.props.dispatch({
-        type: "SET_STATE",
-        data: {isSearch: false}
-      })
-    }
+    this.props.dispatch({
+      type: "SET_STATE",
+      data: {searchWord}
+    })
   }
   handleSearch = (event) => {
     event.preventDefault();
@@ -28,6 +21,11 @@ class SearchBar extends React.Component {
       this.props.dispatch({
         type: "SET_STATE",
         data: {isSearch: true, searchWordSearched: this.props.searchWord}
+      })
+    } else {
+      this.props.dispatch({
+        type: "SET_STATE",
+        data: {isSearch: false}
       })
     }
   }
