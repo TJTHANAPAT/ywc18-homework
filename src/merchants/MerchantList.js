@@ -66,10 +66,15 @@ class MerchantList extends React.Component {
       const searchWord = searchWordSearched.toLowerCase()
       merchantsFiltered = merchantsFiltered.filter((item) => {
         const merchantShopName = item.shopNameTH.toLowerCase()
+        const merchantCategoryName = item.categoryName.toLowerCase()
+        const merchantSubcategoryName = item.subcategoryName.toLowerCase()
         const merchantHighlightText = item.highlightText.toLowerCase()
         const merchantRecommendedItems = item.recommendedItems.join(' ').toLowerCase()
         return (
-          merchantShopName.includes(searchWord) || merchantHighlightText.includes(searchWord) ||
+          merchantShopName.includes(searchWord) || 
+          merchantCategoryName.includes(searchWord) ||
+          merchantSubcategoryName.includes(searchWord) ||
+          merchantHighlightText.includes(searchWord) ||
           merchantRecommendedItems.includes(searchWord)
         )
       })

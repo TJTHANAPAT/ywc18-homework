@@ -2,6 +2,7 @@
 :root {
   --custom-blue: #213e7c;
   --custom-blue-hover: #4466ad;
+  --custom-light-blue: #c7d2ec;
 }
 
 body {
@@ -127,7 +128,7 @@ button.btn-toggle-close:hover{
   display: flex;
   flex-direction: row;
   background-color: #fff;
-  border: 1px solid var(--light-blue);
+  border: 1px solid var(--custom-light-blue);
   border-radius: 5px;
   margin: 0 0 25px;
 }
