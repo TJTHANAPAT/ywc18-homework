@@ -86,3 +86,6 @@ h1,h2,h3,h4 {
 .filter label.filter-name{
     font-weight: 600;
 }
+.filter .filter-radio{
+    margin: 0 0 5px;
+}

@@ -1,9 +1,12 @@
 import React from 'react';
+import {connect} from 'react-redux'
 
 import './css/style.css';
 import './css/bootstrap.min.css'
 import './App.css';
+import Header from './Header';
 import MerchantDetail from './MerchantDetail'
+import FilterPanel from './filters/FilterPanel';
 
 class App extends React.Component {
   state = {
@@ -31,6 +34,10 @@ class App extends React.Component {
           shopNameTH: "สุกกี้ตี๋น้อย",
           subcategoryName: "ชาบู สุกี้ยากี้ หม้อไฟ",
           facilities: ['ไม่มี']
+        })
+        this.props.dispatch({
+          type: 'SET_STATE',
+          data: {jsonData: jsonData},
         })
         this.setState({
           isLoading: false,
@@ -290,6 +297,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
+        <Header/>
         <nav className="navbar navbar-light bg-light">
           <span className="navbar-brand mb-0 h1">คนละครึ่ง by YWC</span>
 
@@ -313,6 +321,7 @@ class App extends React.Component {
         </nav>
         <div className="container-fluid">
           <div className="row">
+            <FilterPanel/>
             <div className="filter-panel col-md-3">
               {this.filterCategory()}
               {this.filterPriceRange()}
@@ -329,4 +338,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default connect()(App);
