@@ -11,7 +11,7 @@ class MerchantList extends React.Component {
     let {
       jsonData,
       filterKeyCategory,
-      filterKeySubcatagory,
+      filterKeySubcategory,
       filterKeyPriceRange,
       filterKeyArea,
       isSearch,
@@ -36,27 +36,27 @@ class MerchantList extends React.Component {
       merchantsFiltered = merchantsFiltered.filter((item) => {
         return (item.categoryName === filterKeyCategory || item.categoryName === 'ร้านอาหาร' || item.categoryName === 'ร้านเครื่องดื่ม')
       })
-      if (filterKeySubcatagory !== 'all') {
+      if (filterKeySubcategory !== 'all') {
         merchantsFiltered = merchantsFiltered.filter((item) => {
-          return (item.subcategoryName === filterKeySubcatagory)
+          return (item.subcategoryName === filterKeySubcategory)
         })
       }
     } else if (filterKeyCategory === 'สินค้าทั่วไป') {
       merchantsFiltered = merchantsFiltered.filter((item) => {
         return (item.categoryName === filterKeyCategory || item.categoryName === 'แฟชั่น')
       })
-      if (filterKeySubcatagory !== 'all') {
+      if (filterKeySubcategory !== 'all') {
         merchantsFiltered = merchantsFiltered.filter((item) => {
-          return (item.subcategoryName === filterKeySubcatagory)
+          return (item.subcategoryName === filterKeySubcategory)
         })
       }
     } else {
       merchantsFiltered = merchantsFiltered.filter((item) => {
         return (item.categoryName === filterKeyCategory)
       })
-      if (filterKeySubcatagory !== 'all') {
+      if (filterKeySubcategory !== 'all') {
         merchantsFiltered = merchantsFiltered.filter((item) => {
-          return (item.subcategoryName === filterKeySubcatagory)
+          return (item.subcategoryName === filterKeySubcategory)
         })
       }
     }
