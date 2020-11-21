@@ -29,11 +29,9 @@ class TitleBar extends React.Component {
       if (filterKeyCategory === 'all') {
         filterKeyCategory = 'ร้านค้า'
       }
-      if (filterKeySubcategory === 'all') {
-        console.log('all sub')
+      if (filterKeySubcategory === 'all' || filterKeyCategory === 'all') {
         filterKeySubcategory = 'ทั้งหมด'
       } else {
-        console.log(filterKeySubcategory)
         filterKeySubcategory = `ประเภท ${filterKeySubcategory}`
       }
       return (
