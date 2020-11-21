@@ -27,18 +27,23 @@ class TitleBar extends React.Component {
       )
     } else {
       if (filterKeyCategory === 'all') {
-        filterKeyCategory = 'ร้านค้า'
-      }
-      if (filterKeySubcategory === 'all' || filterKeyCategory === 'all') {
-        filterKeySubcategory = 'ทั้งหมด'
+        return (
+          <div className="title-bar col-12">
+            <h4>ผลการค้นหา ร้านค้า ทั้งหมด</h4>
+          </div>
+        )
       } else {
-        filterKeySubcategory = `ประเภท ${filterKeySubcategory}`
+        if (filterKeySubcategory === 'all') {
+          filterKeySubcategory = 'ทั้งหมด'
+        } else {
+          filterKeySubcategory = `ประเภท ${filterKeySubcategory}`
+        }
+        return (
+          <div className="title-bar col-12">
+            <h4>ผลการค้นหา {filterKeyCategory} {filterKeySubcategory}</h4>
+          </div>
+        )
       }
-      return (
-        <div className="title-bar col-12">
-          <h4>ผลการค้นหา {filterKeyCategory} {filterKeySubcategory}</h4>
-        </div>
-      )
     }
   }
 }
