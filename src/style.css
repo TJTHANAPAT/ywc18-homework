@@ -140,7 +140,7 @@ button.btn-toggle-close:hover{
 }
 .merchant .body .badge {
   font-size: 55% !important;
-  font-weight: 400;
+  font-weight: 300;
 }
 .merchant .body .details {
   display: flex;
