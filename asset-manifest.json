@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/ywc18-homework/static/css/main.6c6a705b.chunk.css",
-    "main.js": "/ywc18-homework/static/js/main.6ff0b72f.chunk.js",
-    "main.js.map": "/ywc18-homework/static/js/main.6ff0b72f.chunk.js.map",
+    "main.css": "/ywc18-homework/static/css/main.c4014ef4.chunk.css",
+    "main.js": "/ywc18-homework/static/js/main.5d7458eb.chunk.js",
+    "main.js.map": "/ywc18-homework/static/js/main.5d7458eb.chunk.js.map",
     "runtime-main.js": "/ywc18-homework/static/js/runtime-main.462a5601.js",
     "runtime-main.js.map": "/ywc18-homework/static/js/runtime-main.462a5601.js.map",
     "static/js/2.b7a74de5.chunk.js": "/ywc18-homework/static/js/2.b7a74de5.chunk.js",
     "static/js/2.b7a74de5.chunk.js.map": "/ywc18-homework/static/js/2.b7a74de5.chunk.js.map",
     "index.html": "/ywc18-homework/index.html",
-    "static/css/main.6c6a705b.chunk.css.map": "/ywc18-homework/static/css/main.6c6a705b.chunk.css.map",
+    "static/css/main.c4014ef4.chunk.css.map": "/ywc18-homework/static/css/main.c4014ef4.chunk.css.map",
     "static/js/2.b7a74de5.chunk.js.LICENSE.txt": "/ywc18-homework/static/js/2.b7a74de5.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.462a5601.js",
     "static/js/2.b7a74de5.chunk.js",
-    "static/css/main.6c6a705b.chunk.css",
-    "static/js/main.6ff0b72f.chunk.js"
+    "static/css/main.c4014ef4.chunk.css",
+    "static/js/main.5d7458eb.chunk.js"
   ]
 }
